@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Family Summer 2026 – Walldorf</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sun: #F5A623;
+    --sky: #4A90D9;
+    --sea: #1A6B8A;
+    --sand: #FFF8ED;
+    --leaf: #3D8B37;
+    --coral: #E8694A;
+    --ink: #1C1A17;
+    --muted: #8C8070;
+    --card: #FFFFFF;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--sand);
+    font-family: 'DM Sans', sans-serif;
+    color: var(--ink);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .sun-deco {
+    position: fixed; top: -80px; right: -80px;
+    width: 260px; height: 260px;
+    background: radial-gradient(circle, #FFD95A 0%, #F5A623 60%, transparent 100%);
+    border-radius: 50%; opacity: 0.22; z-index: 0;
+    animation: pulse 6s ease-in-out infinite;
+  }
+  @keyframes pulse { 0%,100%{transform:scale(1);} 50%{transform:scale(1.08);} }
+
+  .wave-bottom {
+    position: fixed; bottom: 0; left: 0;
+    width: 100%; height: 120px;
+    background: linear-gradient(to top, rgba(74,144,217,0.10), transparent);
+    z-index: 0; pointer-events: none;
+  }
+
+  .container {
+    position: relative; z-index: 1;
+    max-width: 940px; margin: 0 auto;
+    padding: 36px 20px 80px;
+  }
+
+  /* ── HEADER ── */
+  header { text-align: center; margin-bottom: 32px; }
+  .eyebrow {
+    font-size: 11px; letter-spacing: 4px;
+    text-transform: uppercase; color: var(--coral);
+    font-weight: 500; margin-bottom: 10px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 6vw, 3.2rem);
+    line-height: 1.1; color: var(--sea);
+  }
+  header h1 em { font-style: italic; color: var(--sun); }
+  .subtitle { margin-top: 8px; font-size: 14px; color: var(--muted); font-weight: 300; }
+
+  .family-pills {
+    display: flex; justify-content: center;
+    gap: 8px; flex-wrap: wrap; margin-top: 16px;
+  }
+  .pill { padding: 5px 14px; border-radius: 100px; font-size: 12px; font-weight: 500; }
+  .pill.papa  { background:#1A6B8A22; color:#1A6B8A; }
+  .pill.mama  { background:#E8694A22; color:#C04A2D; }
+  .pill.salim { background:#3D8B3722; color:#2A6326; }
+  .pill.sima  { background:#F5A62322; color:#B87200; }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex; gap: 14px; flex-wrap: wrap;
+    justify-content: center; margin-bottom: 28px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .d-home    { background: #B0C4DE; }
+  .d-trip    { background: #F5A623; }
+  .d-camp    { background: #3D8B37; }
+  .d-work    { background: #9B7FD4; }
+  .d-special { background: #D47FC4; }
+  .d-prep    { background: #E8694A; }
+
+  /* ── WEEK CARDS ── */
+  .week-card {
+    background: var(--card);
+    border-radius: 18px; margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: 0 2px 16px rgba(26,107,138,0.08);
+    transition: transform 0.18s, box-shadow 0.18s;
+  }
+  .week-card:hover { transform: translateY(-2px); box-shadow: 0 8px 28px rgba(26,107,138,0.13); }
+
+  .week-header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 15px 22px;
+    background: linear-gradient(135deg, var(--sea) 0%, var(--sky) 100%);
+    color: white;
+  }
+  .week-card.partial .week-header { background: linear-gradient(135deg,#5b8fa3,#85b8cc); }
+
+  .week-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem; font-weight: 700;
+  }
+  .week-dates { font-size: 12px; opacity: 0.82; font-weight: 300; margin-top: 2px; }
+  .week-tag {
+    font-size: 11px; font-weight: 500;
+    background: rgba(255,255,255,0.2);
+    border-radius: 100px; padding: 4px 12px;
+    text-align: right;
+  }
+
+  .week-body { padding: 16px 22px; }
+
+  /* ── DAY STRIP ── */
+  .day-strip {
+    display: grid; grid-template-columns: repeat(7,1fr);
+    gap: 4px; margin-bottom: 14px;
+  }
+  .day-cell {
+    text-align: center; padding: 6px 2px;
+    border-radius: 8px; font-size: 10px;
+  }
+  .day-cell span { display: block; }
+  .day-cell .dn  { font-weight: 600; font-size: 9px; text-transform: uppercase; letter-spacing: 0.4px; }
+  .day-cell .dd  { font-size: 13px; font-weight: 500; margin-top: 2px; }
+  .day-cell .dlabel { font-size: 8px; margin-top: 2px; line-height: 1.2; }
+
+  /* cell colour themes */
+  .dc-dim    { background:#ECEAE4; color:#bbb; }
+  .dc-dim .dn,.dc-dim .dd,.dc-dim .dlabel { color:#bbb; }
+  .dc-normal { background:#F4F0E8; color:var(--muted); }
+  .dc-wknd   { background:#EDE8DC; color:#9a8e7a; }
+  .dc-geneva { background:#1A6B8A; color:#fff; }
+  .dc-geneva .dn { color:rgba(255,255,255,.8); }
+  .dc-chalet { background:#F5A623; color:#fff; }
+  .dc-chalet .dn,.dc-chalet .dlabel { color:rgba(255,255,255,.85); }
+  .dc-home   { background:#B0C4DE; color:#1E3A50; }
+  .dc-home .dn { color:rgba(30,58,80,.8); }
+  .dc-italy  { background:#E8694A; color:#fff; }
+  .dc-italy .dn { color:rgba(255,255,255,.8); }
+  .dc-munich { background:#9B7FD4; color:#fff; }
+  .dc-munich .dn { color:rgba(255,255,255,.8); }
+  .dc-tfp    { background:#D47FC4; color:#fff; }
+  .dc-tfp .dn,.dc-tfp .dlabel { color:rgba(255,255,255,.85); }
+  .dc-camp   { background:#3D8B37; color:#fff; }
+  .dc-camp .dn,.dc-camp .dlabel { color:rgba(255,255,255,.85); }
+  .dc-prep   { background:#F5EBE8; color:#7A2010; }
+
+  /* split cell — two people doing different things */
+  .dc-split-top    { background: linear-gradient(180deg,#F5A623 50%,#B0C4DE 50%); color:#fff; }
+  .dc-split-top .dn { color:rgba(255,255,255,.85); }
+
+  /* ── PERSON ROWS ── */
+  .person-rows { display: flex; flex-direction: column; gap: 9px; }
+
+  .person-row {
+    display: flex; align-items: flex-start;
+    gap: 12px; padding: 10px 14px;
+    border-radius: 12px;
+  }
+  .person-row.pr-papa  { border-left: 4px solid #1A6B8A; background:#EFF6FA; }
+  .person-row.pr-mama  { border-left: 4px solid #E8694A; background:#FDF4F2; }
+  .person-row.pr-salim { border-left: 4px solid #3D8B37; background:#F2F9F2; }
+  .person-row.pr-sima  { border-left: 4px solid #F5A623; background:#FFF9EE; }
+
+  .plabel {
+    font-size: 11px; font-weight: 700;
+    min-width: 44px; padding-top: 3px;
+    text-transform: uppercase; letter-spacing: 0.5px; flex-shrink: 0;
+  }
+  .pr-papa  .plabel { color:#1A6B8A; }
+  .pr-mama  .plabel { color:#C04A2D; }
+  .pr-salim .plabel { color:#2A6326; }
+  .pr-sima  .plabel { color:#B87200; }
+
+  .pevents { display: flex; flex-wrap: wrap; gap: 7px; flex: 1; }
+
+  .ec {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 4px 10px; border-radius: 8px;
+    font-size: 12px; line-height: 1.4;
+  }
+  .ec-home    { background:#DDE8F0; color:#1E4D65; }
+  .ec-trip    { background:#FEF0D0; color:#7A4800; }
+  .ec-camp    { background:#D8EED7; color:#1A4D18; }
+  .ec-work    { background:#EDEAF7; color:#3D2580; }
+  .ec-special { background:#F9E0F5; color:#7A1A60; }
+  .ec-prep    { background:#FDEAE4; color:#7A2010; }
+  .ec-free    { background:#F0EDE8; color:#6A6055; }
+
+  /* ── DIVIDER / CALLOUT ── */
+  .camp-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg,#3D8B37,#6ab96a);
+    color: #fff; border-radius: 10px;
+    padding: 6px 14px; font-size: 12px; font-weight: 500;
+    margin-bottom: 12px;
+  }
+
+  /* ── NOTE BAR ── */
+  .note-bar {
+    margin-top: 13px; padding: 8px 12px;
+    background: #FFF8ED; border-radius: 8px;
+    font-size: 12px; color: var(--muted);
+    border-left: 3px solid var(--sun);
+  }
+
+  /* ── SCHOOL BANDS ── */
+  .school-band {
+    color: white; text-align: center;
+    padding: 11px 20px; border-radius: 12px;
+    font-size: 13px; font-weight: 500;
+    margin-bottom: 20px;
+  }
+  .sb-start { background: linear-gradient(90deg,#E8694A,#F5A623); }
+  .sb-end   { background: linear-gradient(90deg,#1A6B8A,#4A90D9); }
+
+  footer { text-align: center; margin-top: 40px; font-size: 12px; color: var(--muted); }
+  footer strong { color: var(--sea); }
+</style>
+</head>
+<body>
+<div class="sun-deco"></div>
+<div class="wave-bottom"></div>
+
+<div class="container">
+
+  <header>
+    <div class="eyebrow">☀️ Sommer 2026 · Walldorf 69190</div>
+    <h1>Family <em>Summer</em> Plan</h1>
+    <p class="subtitle">Baden-Württemberg Holidays · 30 July – 13 September · Weeks start Monday</p>
+    <div class="family-pills">
+      <span class="pill papa">👔 Papa</span>
+      <span class="pill mama">👩 Mama</span>
+      <span class="pill salim">🎒 Salim</span>
+      <span class="pill sima">🌸 Sima</span>
+    </div>
+  </header>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot d-home"></div> Home / Walldorf</div>
+    <div class="legend-item"><div class="legend-dot d-trip"></div> Trip / Vacation</div>
+    <div class="legend-item"><div class="legend-dot d-camp"></div> Camp</div>
+    <div class="legend-item"><div class="legend-dot d-work"></div> Work</div>
+    <div class="legend-item"><div class="legend-dot d-special"></div> TFP Program</div>
+    <div class="legend-item"><div class="legend-dot d-prep"></div> School Prep</div>
+  </div>
+
+  <div class="school-band sb-start">
+    📚 Last school day: Wednesday 29 July — Holidays begin Thursday 30 July!
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- WEEK 0 · Thu 30 Jul – Sun 2 Aug (partial)                 -->
+  <!-- Thu 30: whole family departs → Geneva                     -->
+  <!-- Sat 1 Aug: family drives to Chalet, France                -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="week-card partial">
+    <div class="week-header">
+      <div>
+        <div class="week-num">Week 0 <span style="font-size:.95rem;opacity:.65">— Partial</span></div>
+        <div class="week-dates">Thu 30 July – Sun 2 August</div>
+      </div>
+      <div class="week-tag">🇨🇭 Geneva → 🇫🇷 Chalet</div>
+    </div>
+    <div class="week-body">
+      <div class="day-strip">
+        <div class="day-cell dc-dim">   <span class="dn">Mon</span><span class="dd">27</span><span class="dlabel">school</span></div>
+        <div class="day-cell dc-dim">   <span class="dn">Tue</span><span class="dd">28</span><span class="dlabel">school</span></div>
+        <div class="day-cell dc-dim">   <span class="dn">Wed</span><span class="dd">29</span><span class="dlabel">last day</span></div>
+        <div class="day-cell dc-normal"><span class="dn">Thu</span><span class="dd">30</span><span class="dlabel">packing day</span></div>
+        <div class="day-cell dc-geneva"><span class="dn">Fri 🚗</span><span class="dd">31</span><span class="dlabel">→ Geneva</span></div>
+        <div class="day-cell dc-chalet"><span class="dn">Sat 🏔️</span><span class="dd">1</span><span class="dlabel">Chalet</span></div>
+        <div class="day-cell dc-chalet"><span class="dn">Sun</span><span class="dd">2</span><span class="dlabel">Chalet</span></div>
+      </div>
+      <div class="person-rows">
+        <div class="person-row" style="border-left:4px solid #1A6B8A;background:#EFF6FA;">
+          <div class="plabel" style="color:#1A6B8A;min-width:80px;">👨‍👩‍👧‍👦 All</div>
+          <div class="pevents">
+            <span class="ec ec-prep">🧳 Thu 30 Jul: Packing day</span>
+            <span class="ec ec-trip">🚗 Fri 31 Jul: Depart morning → Geneva</span>
+            <span class="ec ec-trip">🏔️ Sat 1 Aug: Drive to Chalet, France</span>
+            <span class="ec ec-trip">🏔️ Sun 2 Aug: Chalet, France</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">🚗 Walldorf → Geneva ~6 hrs by car. One night in Geneva, then on to the French chalet on Saturday morning.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- WEEK 1 · Mon 3 – Sun 9 August                             -->
+  <!-- Mon–Wed: Whole family at chalet                           -->
+  <!-- Thu 6: Papa + Sima leave chalet → drive home (Walldorf)  -->
+  <!-- Fri 7: Papa + Sima at home                                -->
+  <!-- Sat 8: Papa + Sima depart morning → camp                  -->
+  <!-- Sat 8: Sima also starts TFP (same departure day)          -->
+  <!-- Mama + Salim stay at chalet through the week              -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="week-card">
+    <div class="week-header">
+      <div>
+        <div class="week-num">Week 1</div>
+        <div class="week-dates">Mon 3 – Sun 9 August</div>
+      </div>
+      <div class="week-tag">🏔️ Chalet · Family splits Thu</div>
+    </div>
+    <div class="week-body">
+      <div class="day-strip">
+        <div class="day-cell dc-chalet"><span class="dn">Mon</span><span class="dd">3</span><span class="dlabel">all at chalet</span></div>
+        <div class="day-cell dc-chalet"><span class="dn">Tue</span><span class="dd">4</span><span class="dlabel">all at chalet</span></div>
+        <div class="day-cell dc-chalet"><span class="dn">Wed</span><span class="dd">5</span><span class="dlabel">all at chalet</span></div>
+        <div class="day-cell dc-home">  <span class="dn">Thu 🚗</span><span class="dd">6</span><span class="dlabel">all drive home</span></div>
+        <div class="day-cell dc-home">  <span class="dn">Fri</span><span class="dd">7</span><span class="dlabel">home / fly eve</span></div>
+        <div class="day-cell dc-camp">  <span class="dn">Sat ⛺</span><span class="dd">8</span><span class="dlabel">→ camp</span></div>
+        <div class="day-cell dc-munich"><span class="dn">Sun 🚗</span><span class="dd">9</span><span class="dlabel">Papa→Munich</span></div>
+      </div>
+      <div class="person-rows">
+        <!-- Mon–Wed: everyone together at the chalet -->
+        <div class="person-row" style="border-left:4px solid #1A6B8A;background:#EFF6FA;">
+          <div class="plabel" style="color:#1A6B8A;min-width:80px;">👨‍👩‍👧‍👦 All</div>
+          <div class="pevents">
+            <span class="ec ec-trip">🏔️ Mon–Wed: All at Chalet, France</span>
+            <span class="ec ec-home">🚗 Thu 6: All drive home → Walldorf</span>
+            <span class="ec ec-home">🏠 Fri 7: All home – Walldorf</span>
+          </div>
+        </div>
+        <!-- Fri evening split -->
+        <div class="person-row pr-mama">
+          <div class="plabel" style="color:#C04A2D;min-width:100px;">👩 Mama &amp; 🎒 Salim</div>
+          <div class="pevents">
+            <span class="ec ec-trip">✈️ Fri 7 evening: Fly → Pisa</span>
+            <span class="ec ec-activity" style="background:#E3F3E3;color:#1A4D18;">🎨 Sat 8: Workshop starts 1 pm – Tuscany</span>
+            <span class="ec ec-activity" style="background:#E3F3E3;color:#1A4D18;">🎨 Sun 9: Workshop – Tuscany</span>
+          </div>
+        </div>
+        <div class="person-row pr-papa">
+          <div class="plabel" style="color:#1A6B8A;min-width:80px;">👔 Papa &amp; 🌸 Sima</div>
+          <div class="pevents">
+            <span class="ec ec-camp">🚗 Sat 8: Drive together → Camp</span>
+          </div>
+        </div>
+        <div class="person-row pr-papa">
+          <div class="plabel">Papa</div>
+          <div class="pevents">
+            <span class="ec ec-work">🚗 Sun 9: Drives → Munich</span>
+          </div>
+        </div>
+        <div class="person-row pr-sima">
+          <div class="plabel">Sima</div>
+          <div class="pevents">
+            <span class="ec ec-special">🎭 Sun 9: Stays at TFP Camp</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">🚗 Whole family drives home together Thursday. Friday: Mama &amp; Salim fly to Pisa in the evening; Papa &amp; Sima drive to camp Saturday morning. Papa on to Munich Sunday.</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- WEEK 2 · Mon 10 – Sun 16 August                           -->
+  <!-- Papa → Munich · Mama + Salim → Italy (from chalet)        -->
+  <!-- Sima → TFP camp (8–16 Aug, departs Sat 16 Aug)            -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="week-card">
+    <div class="week-header">
+      <div>
+        <div class="week-num">Week 2</div>
+        <div class="week-dates">Mon 10 – Sun 16 August</div>
+      </div>
+      <div class="week-tag">🌍 Split Week!</div>
+    </div>
+    <div class="week-body">
+      <div class="day-strip">
+        <div class="day-cell dc-camp">  <span class="dn">Mon</span><span class="dd">10</span><span class="dlabel">workshop</span></div>
+        <div class="day-cell dc-camp">  <span class="dn">Tue</span><span class="dd">11</span><span class="dlabel">workshop</span></div>
+        <div class="day-cell dc-home">  <span class="dn">Wed ✈️</span><span class="dd">12</span><span class="dlabel">fly home</span></div>
+        <div class="day-cell dc-normal"><span class="dn">Thu</span><span class="dd">13</span><span class="dlabel">home</span></div>
+        <div class="day-cell dc-normal"><span class="dn">Fri</span><span class="dd">14</span><span class="dlabel">home</span></div>
+        <div class="day-cell dc-geneva"><span class="dn">Sat 🚂</span><span class="dd">15</span><span class="dlabel">→ Munich</span></div>
+        <div class="day-cell dc-geneva"><span class="dn">Sun 🏠</span><span class="dd">16</span><span class="dlabel">drive home</span></div>
+      </div>
+      <div class="person-rows">
+        <div class="person-row pr-papa">
+          <div class="plabel">Papa</div>
+          <div class="pevents">
+            <span class="ec ec-work">🏙️ Munich (Mon–Fri)</span>
+          </div>
+        </div>
+        <div class="person-row pr-mama">
+          <div class="plabel" style="color:#C04A2D;min-width:100px;">👩 Mama &amp; 🎒 Salim</div>
+          <div class="pevents">
+            <span class="ec ec-activity" style="background:#E3F3E3;color:#1A4D18;">🎨 Mon–Tue: Workshop – Tuscany</span>
+            <span class="ec ec-trip">✈️ Wed 12: Fly back → Frankfurt morning</span>
+            <span class="ec ec-home">🏠 Wed–Fri: Home – chilling</span>
+          </div>
+        </div>
+        <div class="person-row pr-sima">
+          <div class="plabel">Sima</div>
+          <div class="pevents">
+            <span class="ec ec-special">🎭 TFP Camp (Mon–Sat)</span>
+          </div>
+        </div>
+        <div class="person-row pr-papa">
+          <div class="plabel" style="color:#1A6B8A;min-width:100px;">👔 Papa &amp; 🎒 Salim</div>
+          <div class="pevents">
+            <span class="ec ec-trip">🚂 Sat 15: Salim trains → Munich · Papa drives to pick up Sima</span>
+            <span class="ec ec-trip">🌙 Sat night: Stay overnight with Sima</span>
+            <span class="ec ec-home">🚗 Sun 16: Drive back to Walldorf</span>
+          </div>
+        </div>
+        <div class="person-row pr-mama">
+          <div class="plabel">Mama</div>
+          <div class="pevents">
+            <span class="ec ec-home">🏠 Sat–Sun: Home – Walldorf</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">🚂 Salim takes the train Saturday morning to Munich, then drives with Papa to collect Sima. Mama stays home. The three drive back together Sunday!</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- WEEK 3 · Mon 17 – Sun 23 August                           -->
+  <!-- Whole family home in Walldorf                             -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="week-card">
+    <div class="week-header">
+      <div>
+        <div class="week-num">Week 3</div>
+        <div class="week-dates">Mon 17 – Sun 23 August</div>
+      </div>
+      <div class="week-tag">🏡 Whole Family Home</div>
+    </div>
+    <div class="week-body">
+      <div class="day-strip">
+        <div class="day-cell dc-normal"><span class="dn">Mon</span><span class="dd">17</span></div>
+        <div class="day-cell dc-normal"><span class="dn">Tue</span><span class="dd">18</span></div>
+        <div class="day-cell dc-normal"><span class="dn">Wed</span><span class="dd">19</span></div>
+        <div class="day-cell dc-normal"><span class="dn">Thu</span><span class="dd">20</span></div>
+        <div class="day-cell dc-normal"><span class="dn">Fri</span><span class="dd">21</span></div>
+        <div class="day-cell dc-wknd"> <span class="dn">Sat</span><span class="dd">22</span></div>
+        <div class="day-cell dc-wknd"> <span class="dn">Sun</span><span class="dd">23</span></div>
+      </div>
+      <div class="person-rows">
+        <div class="person-row pr-papa">
+          <div class="plabel">Papa</div>
+          <div class="pevents">
+            <span class="ec ec-work">💼 Working</span>
+          </div>
+        </div>
+        <div class="person-row pr-mama">
+          <div class="plabel">Mama</div>
+          <div class="pevents">
+            <span class="ec ec-work">📖 Studying</span>
+          </div>
+        </div>
+        <div class="person-row pr-salim">
+          <div class="plabel">Salim</div>
+          <div class="pevents">
+            <span class="ec ec-home">🏠 Home – Walldorf</span>
+          </div>
+        </div>
+        <div class="person-row pr-sima">
+          <div class="plabel">Sima</div>
+          <div class="pevents">
+            <span class="ec ec-home">🏠 Home – Walldorf</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">🌿 A calm week at home — recharge after all the adventures!</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- WEEK 4 · Mon 24 – Sun 30 August                           -->
+  <!-- Junior Youth Camp — Salim & Sima                          -->
+  <!-- Papa & Mama home                                          -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="week-card">
+    <div class="week-header">
+      <div>
+        <div class="week-num">Week 4</div>
+        <div class="week-dates">Mon 24 – Sun 30 August</div>
+      </div>
+      <div class="week-tag">⛺ Junior Youth Camp</div>
+    </div>
+    <div class="week-body">
+      <div class="camp-badge">⛺ Junior Youth Camp — Salim &amp; Sima</div>
+      <div class="day-strip">
+        <div class="day-cell dc-camp"><span class="dn">Mon</span><span class="dd">24</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"><span class="dn">Tue</span><span class="dd">25</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"><span class="dn">Wed</span><span class="dd">26</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"><span class="dn">Thu</span><span class="dd">27</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"><span class="dn">Fri</span><span class="dd">28</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-wknd"><span class="dn">Sat</span><span class="dd">29</span></div>
+        <div class="day-cell dc-wknd"><span class="dn">Sun</span><span class="dd">30</span></div>
+      </div>
+      <div class="person-rows">
+        <div class="person-row pr-papa">
+          <div class="plabel">Papa</div>
+          <div class="pevents">
+            <span class="ec ec-work">💼 Working</span>
+          </div>
+        </div>
+        <div class="person-row pr-mama">
+          <div class="plabel">Mama</div>
+          <div class="pevents">
+            <span class="ec ec-work">📖 Studying</span>
+          </div>
+        </div>
+        <div class="person-row pr-salim">
+          <div class="plabel">Salim</div>
+          <div class="pevents">
+            <span class="ec ec-camp">⛺ Junior Youth Camp</span>
+          </div>
+        </div>
+        <div class="person-row pr-sima">
+          <div class="plabel">Sima</div>
+          <div class="pevents">
+            <span class="ec ec-camp">⛺ Junior Youth Camp</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">⛺ Salim &amp; Sima at Junior Youth Camp — Papa working, Mama studying!</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- WEEK 5 · Mon 31 Aug – Sun 6 Sep                           -->
+  <!-- Children & Junior Youth Camp: Papa + Salim + Sima Mon–Fri -->
+  <!-- Mama home all week                                        -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="week-card">
+    <div class="week-header">
+      <div>
+        <div class="week-num">Week 5</div>
+        <div class="week-dates">Mon 31 Aug – Sun 6 September</div>
+      </div>
+      <div class="week-tag">⛺ Children &amp; JY Camp · Mon–Fri</div>
+    </div>
+    <div class="week-body">
+      <div class="camp-badge">⛺ Children &amp; Junior Youth Camp — Papa, Salim &amp; Sima · Mon–Fri</div>
+      <div class="day-strip">
+        <div class="day-cell dc-camp"> <span class="dn">Mon</span><span class="dd">31</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"> <span class="dn">Tue</span><span class="dd">1</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"> <span class="dn">Wed</span><span class="dd">2</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"> <span class="dn">Thu</span><span class="dd">3</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"> <span class="dn">Fri</span><span class="dd">4</span><span class="dlabel">Camp</span></div>
+        <div class="day-cell dc-camp"> <span class="dn">Sat 🎉</span><span class="dd">5</span><span class="dlabel">closing party</span></div>
+        <div class="day-cell dc-wknd"> <span class="dn">Sun</span><span class="dd">6</span><span class="dlabel">home</span></div>
+      </div>
+      <div class="person-rows">
+        <div class="person-row pr-papa">
+          <div class="plabel" style="color:#1A6B8A;min-width:130px;">👔 Papa · 🎒 Salim · 🌸 Sima</div>
+          <div class="pevents">
+            <span class="ec ec-camp">⛺ Children &amp; JY Camp (Mon–Fri)</span>
+            <span class="ec ec-activity" style="background:#FEF0D0;color:#7A4800;">🎉 Sat afternoon: Closing Party</span>
+            <span class="ec ec-home">🏠 Home Sun 6 Sep</span>
+          </div>
+        </div>
+        <div class="person-row pr-mama">
+          <div class="plabel">Mama</div>
+          <div class="pevents">
+            <span class="ec ec-work">📖 Studying</span>
+            <span class="ec ec-activity" style="background:#FEF0D0;color:#7A4800;">🎉 Sat afternoon: Closing Party</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">🎉 Camp closes with a party on Saturday afternoon — the whole family attends!</div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <!-- WEEK 6 · Mon 7 – Sun 13 September                         -->
+  <!-- Last week of holidays                                     -->
+  <!-- ══════════════════════════════════════════════════════════ -->
+  <div class="week-card">
+    <div class="week-header">
+      <div>
+        <div class="week-num">Week 6</div>
+        <div class="week-dates">Mon 7 – Sun 13 September</div>
+      </div>
+      <div class="week-tag">🏁 Final Holiday Week</div>
+    </div>
+    <div class="week-body">
+      <div class="day-strip">
+        <div class="day-cell dc-prep"><span class="dn">Mon</span><span class="dd">7</span></div>
+        <div class="day-cell dc-prep"><span class="dn">Tue</span><span class="dd">8</span></div>
+        <div class="day-cell dc-prep"><span class="dn">Wed</span><span class="dd">9</span></div>
+        <div class="day-cell dc-prep"><span class="dn">Thu</span><span class="dd">10</span></div>
+        <div class="day-cell dc-prep"><span class="dn">Fri</span><span class="dd">11</span></div>
+        <div class="day-cell dc-wknd"><span class="dn">Sat</span><span class="dd">12</span></div>
+        <div class="day-cell dc-wknd"><span class="dn">Sun</span><span class="dd">13</span></div>
+      </div>
+      <div class="person-rows">
+        <div class="person-row pr-papa">
+          <div class="plabel">Papa</div>
+          <div class="pevents">
+            <span class="ec ec-work">💼 Working</span>
+          </div>
+        </div>
+        <div class="person-row pr-mama">
+          <div class="plabel">Mama</div>
+          <div class="pevents">
+            <span class="ec ec-work">📖 Studying</span>
+          </div>
+        </div>
+        <div class="person-row pr-salim">
+          <div class="plabel">Salim</div>
+          <div class="pevents">
+            <span class="ec ec-prep">📚 Studying – school prep</span>
+          </div>
+        </div>
+        <div class="person-row pr-sima">
+          <div class="plabel">Sima</div>
+          <div class="pevents">
+            <span class="ec ec-special">🎪 Circus Camp</span>
+          </div>
+        </div>
+      </div>
+      <div class="note-bar">🏁 Last week of the summer holidays — ready for a great new school year!</div>
+    </div>
+  </div>
+
+  <div class="school-band sb-end">
+    📚 Salim back to school: Monday 14 September · Sima back to school: Tuesday 15 September — Viel Erfolg! 🌟
+  </div>
+
+  <footer>
+    <p>Made with ❤️ for the <strong>Family in Walldorf 69190</strong> · Summer 2026</p>
+    <p style="margin-top:6px;font-size:11px;">Weeks start Monday · BW school holidays 30 July – 13 September 2026</p>
+  </footer>
+
+</div>
+</body>
+</html>
