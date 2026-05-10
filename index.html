@@ -225,6 +225,10 @@
   .sb-start { background: linear-gradient(90deg,#E8694A,#F5A623); }
   .sb-end   { background: linear-gradient(90deg,#1A6B8A,#4A90D9); }
 
+  .week-summary {
+    font-size: 12px; opacity: 0.92; font-weight: 400;
+    margin-top: 5px; font-style: italic;
+  }
   footer { text-align: center; margin-top: 40px; font-size: 12px; color: var(--muted); }
   footer strong { color: var(--sea); }
 </style>
@@ -236,9 +240,9 @@
 <div class="container">
 
   <header>
-    <div class="eyebrow">☀️ Sommer 2026 · Walldorf 69190</div>
+    <div class="eyebrow">☀️ Sommer 2026</div>
     <h1>Family <em>Summer</em> Plan</h1>
-    <p class="subtitle">Baden-Württemberg Holidays · 30 July – 13 September · Weeks start Monday</p>
+    <p class="subtitle">30 July – 13 September · Weeks start Monday</p>
     <div class="family-pills">
       <span class="pill papa">👔 Papa</span>
       <span class="pill mama">👩 Mama</span>
@@ -247,13 +251,18 @@
     </div>
   </header>
 
-  <div class="legend">
-    <div class="legend-item"><div class="legend-dot d-home"></div> Home / Walldorf</div>
-    <div class="legend-item"><div class="legend-dot d-trip"></div> Trip / Vacation</div>
-    <div class="legend-item"><div class="legend-dot d-camp"></div> Camp</div>
-    <div class="legend-item"><div class="legend-dot d-work"></div> Work</div>
-    <div class="legend-item"><div class="legend-dot d-special"></div> TFP Program</div>
-    <div class="legend-item"><div class="legend-dot d-prep"></div> School Prep</div>
+  <!-- OVERALL SUMMARY -->
+  <div style="background:white;border-radius:18px;padding:20px 24px;margin-bottom:24px;box-shadow:0 2px 16px rgba(26,107,138,0.08);">
+    <div style="font-size:13px;font-weight:700;color:var(--sea);margin-bottom:12px;letter-spacing:0.3px;">☀️ SUMMER AT A GLANCE</div>
+    <div style="display:flex;flex-direction:column;gap:7px;">
+      <div style="font-size:13px;color:var(--ink);">🗓️ <strong>Week 0</strong> — Drive to Geneva, then Megève chalet</div>
+      <div style="font-size:13px;color:var(--ink);">🏔️ <strong>Week 1</strong> — Chalet · Family splits Thu · Mama &amp; Salim → Tuscany · Papa &amp; Sima → camp</div>
+      <div style="font-size:13px;color:var(--ink);">🌍 <strong>Week 2</strong> — Papa Munich · Mama &amp; Salim workshop then home · Sima TFP camp</div>
+      <div style="font-size:13px;color:var(--ink);">🏡 <strong>Week 3</strong> — Everyone home</div>
+      <div style="font-size:13px;color:var(--ink);">⛺ <strong>Week 4</strong> — Salim &amp; Sima: Junior Youth Camp</div>
+      <div style="font-size:13px;color:var(--ink);">⛺ <strong>Week 5</strong> — Papa, Salim &amp; Sima: Children &amp; JY Camp</div>
+      <div style="font-size:13px;color:var(--ink);">🎪 <strong>Week 6</strong> — Sima: Circus Camp · Salim: school prep</div>
+    </div>
   </div>
 
   <div class="school-band sb-start">
@@ -289,8 +298,8 @@
           <div class="pevents">
             <span class="ec ec-prep">🧳 Thu 30 Jul: Packing day</span>
             <span class="ec ec-trip">🚗 Fri 31 Jul: Depart morning → Geneva</span>
-            <span class="ec ec-trip">🏔️ Sat 1 Aug: Drive to Chalet, France</span>
-            <span class="ec ec-trip">🏔️ Sun 2 Aug: Chalet, France</span>
+            <span class="ec ec-trip">🏔️ Sat 1 Aug: Drive to Chalet in Megève, France</span>
+            <span class="ec ec-trip">🏔️ Sun 2 Aug: Chalet in Megève, France</span>
           </div>
         </div>
       </div>
@@ -330,7 +339,7 @@
         <div class="person-row" style="border-left:4px solid #1A6B8A;background:#EFF6FA;">
           <div class="plabel" style="color:#1A6B8A;min-width:80px;">👨‍👩‍👧‍👦 All</div>
           <div class="pevents">
-            <span class="ec ec-trip">🏔️ Mon–Wed: All at Chalet, France</span>
+            <span class="ec ec-trip">🏔️ Mon–Wed: All at Chalet in Megève, France</span>
             <span class="ec ec-home">🚗 Thu 6: All drive home → Walldorf</span>
             <span class="ec ec-home">🏠 Fri 7: All home – Walldorf</span>
           </div>
@@ -635,6 +644,89 @@
 
   <div class="school-band sb-end">
     📚 Salim back to school: Monday 14 September · Sima back to school: Tuesday 15 September — Viel Erfolg! 🌟
+  </div>
+
+  <!-- ── MAP ── -->
+  <div class="week-card" style="margin-bottom:20px;">
+    <div class="week-header" style="background:linear-gradient(135deg,#2d6a4f,#52b788);">
+      <div>
+        <div class="week-num">Family Travel Map</div>
+        <div class="week-dates">All destinations · Summer 2026</div>
+      </div>
+      <div class="week-tag">🗺️ Where we go</div>
+    </div>
+    <div class="week-body" style="padding:0;">
+      <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+      <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+      <div id="map" style="height:420px;width:100%;"></div>
+      <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var map = L.map('map', { zoomControl: true, scrollWheelZoom: false }).setView([47.5, 10.5], 5);
+          L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '© OpenStreetMap contributors',
+            maxZoom: 10
+          }).addTo(map);
+
+          // Draw a dashed arrow between two points
+          function arrow(from, to, color) {
+            // Dashed line
+            L.polyline([from, to], {
+              color: color, weight: 2.5, opacity: 0.75,
+              dashArray: '7,5'
+            }).addTo(map);
+
+            // Arrowhead: calculate angle and draw a small triangle at destination
+            var p1 = map.latLngToContainerPoint(L.latLng(from));
+            var p2 = map.latLngToContainerPoint(L.latLng(to));
+            var angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+            var size = 8;
+            var tip = to;
+            // We use a rotated marker as arrowhead
+            var arrowIcon = L.divIcon({
+              className: '',
+              html: '<div style="width:0;height:0;border-left:'+size+'px solid transparent;border-right:'+size+'px solid transparent;border-bottom:'+(size*2)+'px solid '+color+';transform:rotate('+((angle * 180 / Math.PI)+90)+'deg);opacity:0.85;"></div>',
+              iconSize: [size*2, size*2],
+              iconAnchor: [size, size]
+            });
+            L.marker(tip, { icon: arrowIcon, interactive: false }).addTo(map);
+          }
+
+          // Locations
+          var walldorf = [49.305, 8.651];
+          var geneva   = [46.204, 6.143];
+          var megeve   = [45.857, 6.618];
+          var pisa     = [43.723, 10.402];
+          var munich   = [48.135, 11.582];
+          var hluboka  = [49.053, 14.432];
+
+          // Routes
+          arrow(walldorf, geneva,  '#1A6B8A'); // Walldorf → Geneva
+          arrow(geneva,   megeve,  '#F5A623'); // Geneva → Megève
+          arrow(walldorf, munich,  '#9B7FD4'); // Walldorf → Munich
+          arrow(walldorf, pisa,    '#E8694A'); // Mama & Salim → Pisa
+          arrow(walldorf, hluboka, '#D47FC4'); // Sima → Hluboka
+          arrow(munich,   hluboka, '#9B7FD4'); // Papa & Salim pick up Sima
+
+          // Pins on top
+          function pin(lat, lng, color, emoji, label) {
+            var icon = L.divIcon({
+              className: '',
+              html: '<div style="background:'+color+';color:white;border:2.5px solid white;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,0.25);">'+emoji+'</div>',
+              iconSize: [32,32], iconAnchor: [16,16], popupAnchor: [0,-18]
+            });
+            L.marker([lat, lng], {icon: icon}).addTo(map)
+              .bindPopup('<strong>'+label+'</strong>', {closeButton:false});
+          }
+
+          pin(49.305, 8.651,  '#1A6B8A', '🏠', 'Walldorf — Home');
+          pin(46.204, 6.143,  '#4A90D9', '🇨🇭', 'Geneva — Week 0 stopover');
+          pin(45.857, 6.618,  '#F5A623', '🏔️', 'Megève — Chalet Wk 0–1');
+          pin(43.723, 10.402, '#E8694A', '🇮🇹', 'Pisa / Tuscany — Mama & Salim Wk 1–2');
+          pin(48.135, 11.582, '#9B7FD4', '🏙️', 'Munich — Papa Wk 1–2');
+          pin(49.053, 14.432, '#D47FC4', '🎭', 'Hluboka — Sima TFP Camp Wk 1–2');
+        });
+      </script>
+    </div>
   </div>
 
   <footer>
